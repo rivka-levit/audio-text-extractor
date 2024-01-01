@@ -1,0 +1,29 @@
+services:
+  web:
+    build:
+      context: .
+    volumes:
+      - ./app:/app
+      - dev-static-data:/vol/web
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    command: >
+      sh -c "python -m flask run --host=0.0.0.0"
+
+  db:
+    image: postgres:16-alpine
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+
+
+volumes:
+  dev-db-data:
+  dev-static-data:
