@@ -14,7 +14,7 @@ class TestMoodAnalyzer(TestCase):
     def test_chile_audio_negative_text(self):
         """Test that the text of chile.wav is negative."""
 
-        extracted_text = self.extractor.get_text('tests/chile.wav')
+        success, extracted_text = self.extractor.get_text('tests/chile.wav')
         mood = self.analyzer.get_mood(extracted_text)
 
         self.assertEqual(mood, 'Negative text...')

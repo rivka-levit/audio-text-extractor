@@ -1,4 +1,5 @@
 from speech_recognition import Recognizer, AudioFile
+from speech_recognition.exceptions import UnknownValueError
 
 
 class AudioTextExtractor:
@@ -13,4 +14,9 @@ class AudioTextExtractor:
         with AudioFile(filename) as audio_file:
             audio = self.rcz.record(audio_file)
 
-        return self.rcz.recognize_google(audio)
+        try:
+            speech = self.rcz.recognize_google(audio)
+            return True, speech
+
+        except UnknownValueError:
+            return False, 'The audio file does not contain any speech.'
