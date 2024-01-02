@@ -15,10 +15,6 @@ RUN python -m pip install --upgrade pip && \
 RUN python -m nltk.downloader vader_lexicon
 RUN pip install -r /tmp/requirements.txt && \
     rm -rf /tmp && \
-    adduser --disabled-password --no-create-home audio-user && \
     mkdir -p /vol/web/media && \
     mkdir -p /vol/web/static && \
-    chown -R audio-user:audio-user /vol && \
     chmod -R 755 /vol
-
-USER audio-user
