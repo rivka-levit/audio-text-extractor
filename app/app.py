@@ -5,6 +5,7 @@ import psycopg2
 from flask import Flask, render_template, request
 
 from datetime import datetime, timezone
+from pathlib import Path
 
 from utils.extractor import AudioTextExtractor
 from utils.mood import MoodAnalyzer
@@ -76,6 +77,10 @@ def index():
                 write_to_db(filepath, text, mood)
             else:
                 mood = None
+                path = Path(filepath)
+                with open(filepath, 'wb') as file:
+                    file.write(b'')
+                path.unlink()
 
             context = {'text': text, 'mood': mood}
             return render_template('extract.html', **context)
