@@ -13,6 +13,7 @@ services:
       - db
     command: >
       sh -c "python create_table.py && 
+             python clean_db.py && 
              python -m flask run --host=0.0.0.0"
 
   db:

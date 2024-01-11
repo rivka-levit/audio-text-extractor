@@ -4,6 +4,7 @@ from app import app
 
 import io
 
+
 class TestApp(TestCase):
     """Tests for the Flask app."""
 
