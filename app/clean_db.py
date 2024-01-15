@@ -4,6 +4,7 @@ import os
 
 from pathlib import Path
 from dotenv import load_dotenv
+from threading import Thread
 
 load_dotenv()
 
@@ -42,4 +43,6 @@ def delete_old_records():
         time.sleep(900)
 
 
-delete_old_records()
+if __name__ == "__main__":
+    thread = Thread(target=delete_old_records, daemon=True)
+    thread.start()
