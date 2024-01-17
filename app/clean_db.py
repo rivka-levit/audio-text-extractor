@@ -43,6 +43,8 @@ def delete_old_records():
         time.sleep(900)
 
 
-if __name__ == "__main__":
-    thread = Thread(target=delete_old_records, daemon=True)
-    thread.start()
+thread = Thread(target=delete_old_records)
+thread.daemon = True
+thread.start()
+print('Clean db script is starting...')
+time.sleep(3)
